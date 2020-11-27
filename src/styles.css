@@ -4,8 +4,8 @@
     font-family: monospace;
     text-decoration: underline rgb(148, 37, 148);
     width: 400px;
-    min-height: 150px;
-    border: 2px solid;
+    min-height: 20px;
+    border: 1px solid;
     padding: 5px;
 }
 
