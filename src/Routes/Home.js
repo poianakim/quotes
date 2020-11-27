@@ -2,27 +2,36 @@ import React, { useEffect, useState } from "react";
 import { db } from "../fbase";
 import ContentEditable from "react-contenteditable";
 
-const Home = () => {
+const Home = ({ userObj }) => {
     const [quote, setQuote] = useState("");
     const [author, setAuthor] = useState("");
     const [title, setTitle] = useState("");
     const [quotes, setQuotes] = useState([]);
 
+    /* **OLD VERSION AND RE RENDER SEVERL TIMES
     const getQuotes = async () => {
-        
         const quotesdb = await db.collection("quotes")
-        .orderBy("createdAt", "asc")
-        .get();
-        quotesdb.forEach((document) =>{
+            .orderBy("createdAt", "asc")
+            .get();
+        quotesdb.forEach((document) => {
             const quoteObj = {
                 ...document.data(),
                 id: document.id,
             }
             setQuotes((prev) => [quoteObj, ...prev]);
         });
-    }
+    } 
+    USING ON SNAP SHOT RENDDERS ONLY ONE TIME and it makes page faster.*/
     useEffect(() => {
-        getQuotes();
+        // getQuotes();
+        db.collection("quotes").orderBy("createdAt", "desc")
+        .onSnapshot((snapshot) => {
+            const quotesArr = snapshot.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,                
+            }))
+           setQuotes(quotesArr);
+        })
     }, [])
     const onInputChange = (event) => {
         setQuote(event.target.value)
@@ -40,6 +49,8 @@ const Home = () => {
         db.collection("quotes").add({
             quote, author, title,
             createdAt: Date.now(),
+            creatorId: userObj.uid,
+            createdBy: userObj.displayName,
         })
         // db.collection("quotes")
         // .orderBy("createdAt", "desc");
@@ -67,16 +78,17 @@ const Home = () => {
             </div>
 
             <div>
-            {quotes.map((qt) =>
-                (<div className="quotes-list" key ={qt.id} >
-                    <ContentEditable 
-                    className="quote-content"
-                    html={qt.quote}
-                    disabled={true}
-                    />
-                    <p>by {qt.author} from {qt.title}</p>
-                </div>)
-            )}
+                {quotes.map((qt) =>
+                    (<div className="quotes-list" key={qt.id} >
+                        <ContentEditable
+                            className="quote-content"
+                            html={qt.quote}
+                            disabled={true}
+                        />
+                        <p>by {qt.author} from {qt.title}</p>
+                        <p> - {qt.createdBy}</p>
+                    </div>)
+                )}
             </div>
         </div>
     )
