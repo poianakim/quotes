@@ -1,0 +1,15 @@
+.quote-input{
+    font-size: 20px;
+    font-weight: bold;
+    font-family: monospace;
+    text-decoration: underline rgb(148, 37, 148);
+    width: 400px;
+    min-height: 150px;
+    border: 2px solid;
+    padding: 5px;
+}
+
+ul {
+    list-style: none;
+    font-size: 30px;
+}
