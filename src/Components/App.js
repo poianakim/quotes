@@ -18,7 +18,7 @@ const App = () => {
     });
   },[]);
   return( 
-   <div>
+   <div className="container">
      <h1>"Quotes"</h1>
       {init ? <AppRouter userObj={userObj} isLoggedIn={isLoggedIn} /> : "Inizializing"}
       <footer>

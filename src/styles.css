@@ -1,12 +1,53 @@
+body{
+    position: relative;
+    padding: 10px;
+    border: solid 1px grey;
+    min-height: 400px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+input {
+    font-family: monospace;
+    border: none;
+    border-bottom: 1px solid grey;
+    margin: 5px;
+}
+button {
+    border: none;
+    border-bottom: 1px solid grey;
+    margin: 5px;
+    font-family: 'Times New Roman', Times, serif;
+}
 .quote-input{
     font-size: 20px;
-    font-weight: bold;
-    font-family: monospace;
+    font-weight: lighter;
     text-decoration: underline grey;
-    width: 400px;
-    min-height: 20px;
-    border: 1px solid;
+    min-height: 80px;
+    border: 1px solid grey;
+    margin-bottom: 10px;
     padding: 5px;
+}
+
+.quote-form{
+    max-width: 480px;
+    position: relative;
+    
+}
+
+.quote-form #author-input {
+    position: absolute;
+    right: 200px;
+    margin-right: 10px;
+
+}
+.quote-form #title-input { 
+    position:  absolute;
+    right: 30px;
+}
+.quote-form #quote-submit {
+    position: absolute;
+    right: 30px;
+    bottom: -50px;
 }
 
 ul {
@@ -16,14 +57,32 @@ ul {
 
 .quotes-list{
     border: 1px solid;
-    margin: 5px;
+    margin-top: 50px;
+    margin-left: 20px;
     padding: 10px;
     max-width: 350px;
 }
 
 .quote-content{
-    font-size: 20px;
+    font-size: 15px;
     font-weight: lighter;
     font-family: monospace;
-    text-decoration: underline rgb(148, 37, 148);
+    text-decoration: underline grey;
+}
+.quote-edit {
+    font-size: 15px;
+    font-weight: lighter;
+    font-family: monospace;
+    border: 1px solid;
+    padding: 15px;
+}
+
+#user-description{
+    width: 400px;
+}
+
+footer{
+    position: absolute;
+    right: 10px;
+    bottom: -40px;
 }

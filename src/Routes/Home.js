@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../fbase";
 import ContentEditable from "react-contenteditable";
+import Quote from "../Components/Quote";
 
 const Home = ({ userObj }) => {
     const [quote, setQuote] = useState("");
@@ -8,20 +9,6 @@ const Home = ({ userObj }) => {
     const [title, setTitle] = useState("");
     const [quotes, setQuotes] = useState([]);
 
-    /* **OLD VERSION AND RE RENDER SEVERL TIMES
-    const getQuotes = async () => {
-        const quotesdb = await db.collection("quotes")
-            .orderBy("createdAt", "asc")
-            .get();
-        quotesdb.forEach((document) => {
-            const quoteObj = {
-                ...document.data(),
-                id: document.id,
-            }
-            setQuotes((prev) => [quoteObj, ...prev]);
-        });
-    } 
-    USING ON SNAP SHOT RENDDERS ONLY ONE TIME and it makes page faster.*/
     useEffect(() => {
         // getQuotes();
         db.collection("quotes").orderBy("createdAt", "desc")
@@ -45,7 +32,9 @@ const Home = ({ userObj }) => {
         }
     }
     const onSubmit = (event) => {
-        event.preventDefault();
+        const confmsg = window.confirm('Do you want to post this quote?')
+        if(confmsg){
+            event.preventDefault();
         db.collection("quotes").add({
             quote, author, title,
             createdAt: Date.now(),
@@ -58,40 +47,55 @@ const Home = ({ userObj }) => {
         setQuote("");
         setAuthor("");
         setTitle("");
+        } else {
+            return ;
+        }
     }
+ 
+    
+
     return (
         <div>
-            <div>
-                <form className="quoteform" onSubmit={onSubmit}>
+
+                <form className="quote-form" onSubmit={onSubmit}>
                     <h4>Leave your favorite quote</h4>
                     <ContentEditable
                         className="quote-input"
                         onChange={onInputChange}
-                        html={quote} />
-                    <input onChange={onChange} value={author}
+                        html={quote}
+                        />
+                    <input id="author-input" onChange={onChange} value={author}
                         type="text" name="author" placeholder="AUTHOR" />
-                    <input onChange={onChange} value={title}
+                    <input id="title-input" onChange={onChange} value={title}
                         type="text" name="title" placeholder="BOOK TITLE" />
                     <br />
-                    <input type="submit" value="post quote" />
+                    <input id="quote-submit" type="submit" value="post quote" />
                 </form>
-            </div>
-
-            <div>
-                {quotes.map((qt) =>
-                    (<div className="quotes-list" key={qt.id} >
-                        <ContentEditable
-                            className="quote-content"
-                            html={qt.quote}
-                            disabled={true}
-                        />
-                        <p>by {qt.author} from {qt.title}</p>
-                        <p> - {qt.createdBy}</p>
-                    </div>)
-                )}
-            </div>
+        
+                {quotes.map((qt) => (
+              
+                    <Quote key={qt.id} quoteObj = {qt} userObj={userObj}/>
+                   
+                ))}
+      
         </div>
     )
 }
 
 export default Home;
+
+
+ /* **OLD VERSION AND RE RENDER SEVERL TIMES
+    const getQuotes = async () => {
+        const quotesdb = await db.collection("quotes")
+            .orderBy("createdAt", "asc")
+            .get();
+        quotesdb.forEach((document) => {
+            const quoteObj = {
+                ...document.data(),
+                id: document.id,
+            }
+            setQuotes((prev) => [quoteObj, ...prev]);
+        });
+    } 
+    USING ON SNAP SHOT RENDDERS ONLY ONE TIME and it makes page faster and it funcions in realtime!!.*/
