@@ -22,7 +22,6 @@ const Quote = ({ quoteObj, userObj }) => {
     }
     const onUpdateSubmit = async (event) => {
         event.preventDefault();
-        console.log('newquote', newQuote);
         await db.doc(`/quotes/${quoteObj.id}`).update({
             quote: newQuote,
             author: newAuthor,

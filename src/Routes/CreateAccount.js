@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { authService } from "../fbase";
+import { authService, db } from "../fbase";
 
 const CreateAccount = () => {
     const [email, setEmail] = useState("");

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { authService, firebaseInstance } from "../fbase";
+import { authService, db, firebaseInstance } from "../fbase";
 
 const Auth = () => {
     const [email, setEmail] = useState("");
@@ -19,6 +19,7 @@ const Auth = () => {
             event.preventDefault();
             await authService.signInWithEmailAndPassword(
                 email, password)
+            
         } catch (error) {
             setSignInError(error.message);
             console.log(error.message);
@@ -29,8 +30,9 @@ const Auth = () => {
         let provider;
         if(name === "google") {
             provider = new firebaseInstance.auth.GoogleAuthProvider();
-        } else if (name === "github") {
+          } else if (name === "github") {
             provider = new firebaseInstance.auth.GithubAuthProvider();
+          
         }
         await authService.signInWithPopup(provider).then((result)=>{
             const user = result.user;
