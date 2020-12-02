@@ -8,7 +8,8 @@ const Home = ({ userObj }) => {
     const [author, setAuthor] = useState("");
     const [title, setTitle] = useState("");
     const [quotes, setQuotes] = useState([]);
-
+    const [page, setPage] = useState("");
+    const [comment, setComment] = useState("");
     useEffect(() => {
         // getQuotes();
         db.collection("quotes").orderBy("createdAt", "desc")
@@ -29,6 +30,10 @@ const Home = ({ userObj }) => {
             setAuthor(value)
         } else if (name === "title") {
             setTitle(value)
+        } else if (name === "page") {
+            setPage(value)
+        } else if (name === "comment") {
+            setComment(value)
         }
     }
     const onSubmit = (event) => {
@@ -36,7 +41,7 @@ const Home = ({ userObj }) => {
         if (confmsg) {
             event.preventDefault();
             db.collection("quotes").add({
-                quote, author, title,
+                quote, author, title, page, comment,
                 createdAt: Date.now(),
                 creatorId: userObj.uid,
                 createdBy: userObj.displayName,
@@ -47,37 +52,41 @@ const Home = ({ userObj }) => {
             setQuote("");
             setAuthor("");
             setTitle("");
+            setPage("");
+            setComment("");
         } else {
             return;
         }
     }
-
-
-
     return (
-        <div>
-
-            <form className="quote-form" onSubmit={onSubmit}>
-                <h4>Leave your favorite quote</h4>
+        <div className="container">
+            <span>Share your favorite quote</span>
+            <form onSubmit={onSubmit}>
                 <ContentEditable
                     className="quote-input"
                     onChange={onInputChange}
                     html={quote}
                 />
-                <input id="author-input" onChange={onChange} value={author}
-                    type="text" name="author" placeholder="AUTHOR" />
-                <input id="title-input" onChange={onChange} value={title}
-                    type="text" name="title" placeholder="BOOK TITLE" />
+                <div className="row input-detail">
+                    <input className="col-xs-6 col-md-3" id="author-input" onChange={onChange} value={author}
+                        type="text" name="author" placeholder="AUTHOR" />
+                    <input className="col-xs-8 col-md-6" id="title-input" onChange={onChange} value={title}
+                        type="text" name="title" placeholder="BOOK TITLE" />
+                    <input className="col-xs-4 col-md-2" id="page-input" onChange={onChange} value={page}
+                        type="text" name="page" placeholder="PAGE" />
+                </div>
                 <br />
-                <input id="quote-submit" type="submit" value="post quote" />
+                <div className="row input-personal">
+                    <input className="col-xs-12 col-md-10" id="comment-input" onChange={onChange} type="text" placeholder="COMMENT"
+                        name="comment" value={comment} maxLength={140} />
+                    <input className="col-xs-6 col-md-1" id="quote-submit" type="submit" value="post" />
+                </div>
             </form>
-
-            {quotes.map((qt) => (
-
-                <Quote key={qt.id} quoteObj={qt} userObj={userObj} />
-
-            ))}
-
+            <div className="row">
+                {quotes.map((qt) => (
+                    <Quote key={qt.id} quoteObj={qt} userObj={userObj} />
+                ))}
+            </div>
         </div>
     )
 }

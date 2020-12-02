@@ -19,7 +19,7 @@ const App = () => {
   },[]);
   return( 
    <div className="container">
-     <h1>"Quotes"</h1>
+     <h1 className="appTitle">"Quotes"</h1>
       {init ? <AppRouter userObj={userObj} isLoggedIn={isLoggedIn} /> : "Inizializing"}
       <footer>
         &copy;"Quotes" {new Date().getFullYear()}

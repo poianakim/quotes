@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useState } from "react";
 import ContentEditable from "react-contenteditable";
 import { db } from "../fbase";
@@ -14,7 +15,7 @@ const Quote = ({ quoteObj, userObj }) => {
     }
     const onDetailChange = (event) => {
         const { target: { value, name } } = event;
-        if(name === "title") {
+        if (name === "title") {
             setNewTitle(value)
         } else if (name === "author") {
             setNewAuthor(value)
@@ -42,37 +43,42 @@ const Quote = ({ quoteObj, userObj }) => {
         }
     }
     return (
-        <div>
-            <div className="quotes-list" key={quoteObj.id} >
-                {editMode ? (<>
-                    <form onSubmit={onUpdateSubmit}>
-                        <ContentEditable
-                            onChange={onQuoteChange}
-                            className="quote-edit"
-                            html={newQuote}
-                        />
-                        <input onChange={onDetailChange} value={newAuthor}
-                            type="text" name="author" placeholder="AUTHOR" />
-                        <input onChange={onDetailChange} value={newTitle}
-                            type="text" name="title" placeholder="BOOK TITLE" />
-                        <input type="submit" value="Save this Update" /></form>
-                </>)
-                    : (<>
-                        <ContentEditable
-                            className="quote-content"
-                            html={quoteObj.quote}
-                            disabled={true}
-                        />
-                        <p>by {quoteObj.author} from {quoteObj.title}</p>
-                        <p> - {quoteObj.createdBy}</p>
-                        {userObj.uid === quoteObj.creatorId &&
-                            (<><button
-                                onClick={onUpdateClick}>Update this Quote</button>
-                                <button
-                                    onClick={onDeleteQuoteClick}> Delete this Quote</button>
-                            </>)}
-                    </>)}
-            </div>
+        <div className="quotes-list" key={quoteObj.id} >
+            {editMode ? (<>
+                <form onSubmit={onUpdateSubmit}>
+                    <ContentEditable
+                        onChange={onQuoteChange}
+                        className="quote-edit"
+                        html={newQuote}
+                    />
+                    <input onChange={onDetailChange} value={newAuthor}
+                        type="text" name="author" placeholder="AUTHOR" />
+                    <input onChange={onDetailChange} value={newTitle}
+                        type="text" name="title" placeholder="BOOK TITLE" />
+                    <input type="submit" value="Save this Update" /></form>
+            </>)
+                : (<>
+                    <p>{moment(quoteObj.createdAt).format('LL')}</p>
+                    <ContentEditable
+                        className="quote-content"
+                        html={quoteObj.quote}
+                        disabled={true}
+                    />
+                    <div className="quote-origin row">
+                        <p id="quote-author" className="col-md-3">Author : {quoteObj.author} </p>
+                        <p className="col-md-9">Book Title : {quoteObj.title}, P. {quoteObj.page}</p>
+                    </div>
+                    <div className="comment-section">
+                        <p>{quoteObj.comment}</p>
+                        <h6> - {quoteObj.createdBy}</h6>
+                    </div>
+                    {userObj.uid === quoteObj.creatorId &&
+                        (<div className="quote-buttons"><button
+                            onClick={onUpdateClick}>Update this Quote</button>
+                            <button
+                                onClick={onDeleteQuoteClick}> Delete this Quote</button>
+                        </div>)}
+                </>)}
         </div>
     )
 }

@@ -1,6 +1,7 @@
 body{
     position: relative;
-    padding: 10px;
+    margin: 40px;
+    padding-bottom: 10px;
     border: solid 1px grey;
     min-height: 400px;
     font-family: 'Times New Roman', Times, serif;
@@ -22,32 +23,18 @@ button {
     font-size: 20px;
     font-weight: lighter;
     text-decoration: underline grey;
-    min-height: 80px;
+    width: 100%;
+    min-height: 100px;
     border: 1px solid grey;
     margin-bottom: 10px;
     padding: 5px;
 }
-
-.quote-form{
-    max-width: 480px;
-    position: relative;
-    
+.input-detail{
+    margin-left: 20vh;
 }
+.input-personal {
 
-.quote-form #author-input {
-    position: absolute;
-    right: 200px;
-    margin-right: 10px;
-
-}
-.quote-form #title-input { 
-    position:  absolute;
-    right: 30px;
-}
-.quote-form #quote-submit {
-    position: absolute;
-    right: 30px;
-    bottom: -50px;
+    margin-left: 20vh;
 }
 
 ul {
@@ -60,14 +47,25 @@ ul {
     margin-top: 50px;
     margin-left: 20px;
     padding: 10px;
-    max-width: 350px;
+    width: 75%;
 }
 
 .quote-content{
+    color: black;
     font-size: 15px;
     font-weight: lighter;
     font-family: monospace;
     text-decoration: underline grey;
+}
+
+.quote-origin{
+    color: grey;
+    font-family: serif;
+    margin-left: 20vh;
+    margin-top: 3px;
+}
+#quote-author{
+    margin-bottom: 0px;
 }
 .quote-edit {
     font-size: 15px;
@@ -85,4 +83,12 @@ footer{
     position: absolute;
     right: 10px;
     bottom: -40px;
+}
+
+.link {
+    color: grey;    
+}
+.navigation :hover{
+    color: grey;
+    font-weight: bolder;
 }
