@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { db } from "../fbase";
 
-const FavoriteAuthorEdit = ({ favAuthorObj }) => {
-    const [authorListEditMode, setAuthorListEditMode] = useState(false);
+const FavoriteAuthorEdit = ({ favAuthorObj, authorListEditMode }) => {
     const [editedFavAuthor, setEditedFavAuthor] = useState("");
     const onChange = (event) => {
         const { target: { value } } = event;
         setEditedFavAuthor(value);
     }
-    const toggleEditAuthorList = () => {
-        setAuthorListEditMode(prev => !prev)
-    }
+
     const onDeleteAuthorClick = async () => {
         await db.doc(`fav-author/${favAuthorObj.id}`).delete()
     }
@@ -20,21 +17,22 @@ const FavoriteAuthorEdit = ({ favAuthorObj }) => {
             updatedAt: Date.now(),
         })
         setEditedFavAuthor("")
+        const authorListEditModeChange = (authorListEditMode) => !authorListEditMode
     }
     return (
-        <div>
-            {authorListEditMode ? (<><form onSubmit={onSubmitEditedFavAuthor}>
-
-                <input onChange={onChange} value={editedFavAuthor} type="text"
-                    placeholder={favAuthorObj.favoriteAuthor} />
-                <input type="submit" value="submit edited author name" />
-            </form>
-            </>) : (<>
-                <ul>
+        <div className="profile-fav-author">
+            {!authorListEditMode && <ul>
                     <li>{favAuthorObj.favoriteAuthor}</li>
-                    <button onClick={toggleEditAuthorList}>Edit</button>
-                    <button onClick={onDeleteAuthorClick}>Delete</button>
-                </ul> </>)}
+                </ul>}
+            {authorListEditMode && 
+                (<form onSubmit={onSubmitEditedFavAuthor}>
+                    <input onChange={onChange} value={editedFavAuthor} type="text"
+                        placeholder={favAuthorObj.favoriteAuthor} />
+                    <input type="submit" value="submit change" />
+                    <button id="delete-fav-author" onClick={onDeleteAuthorClick}>Delete</button>
+                </form>
+            )
+                 }
         </div>
     )
 }

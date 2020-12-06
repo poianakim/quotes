@@ -1,31 +1,45 @@
 import React, { useEffect, useState } from "react";
 import AppRouter from "./Router";
-import { authService } from "../fbase";
+import { authService, db } from "../fbase";
 
-const App = () => {  
+const App = () => {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
-  useEffect(()=>{
+  const [profiles, setProfiles] = useState([]);
+  const getProfiles = async() => {
+    await db.collection("profiles")
+            .onSnapshot((snapshot) => {
+                const profilesDb = snapshot.docs.map((doc) => ({
+                    ...doc.data(),
+                    id: doc.id,
+                }))
+                setProfiles(profilesDb);
+            })
+  }
+  useEffect(() => {
     authService.onAuthStateChanged((user) => {
-      if(user){
+      if (user) {
         setIsLoggedIn(true);
         setUserObj(user);
-      } else{
+      } else {
         setIsLoggedIn(false)
       }
       setInit(true);
     });
-  },[]);
-  return( 
-   <div className="container">
-     <h1 className="appTitle">"Quotes"</h1>
-      {init ? <AppRouter userObj={userObj} isLoggedIn={isLoggedIn} /> : "Inizializing"}
+    getProfiles()
+  }
+  , []);
+
+  return (
+    <div className="container">
+      <h1 className="appTitle">"Quotes"</h1>
+      {init ? <AppRouter profiles={profiles} userObj={userObj} isLoggedIn={isLoggedIn} /> : "Inizializing"}
       <footer>
         &copy;"Quotes" {new Date().getFullYear()}
       </footer>
-   </div>
-    )
+    </div>
+  )
 
 }
 

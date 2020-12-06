@@ -1,7 +1,12 @@
 import moment from "moment";
 import React, { useState } from "react";
 import ContentEditable from "react-contenteditable";
+import { Link } from "react-router-dom";
 import { db } from "../fbase";
+import { HashRouter as Route } from "react-router-dom";
+import Profile from "../Routes/Profile";
+import Switch from "react-bootstrap/esm/Switch";
+
 
 const Quote = ({ quoteObj, userObj }) => {
     const [editMode, setEditMode] = useState(false);
@@ -58,25 +63,36 @@ const Quote = ({ quoteObj, userObj }) => {
                     <input type="submit" value="Save this Update" /></form>
             </>)
                 : (<>
-                    <p>{moment(quoteObj.createdAt).format('LL')}</p>
+
+                    { userObj.uid !== quoteObj.creatorId ?
+                        (
+                            <Link className="link" to={`/${quoteObj.creatorId}`}>
+                                <h4>{quoteObj.createdBy}</h4>
+                            </Link>
+                        ) : (<Link className="link" to="/profile">
+                            <h4>{quoteObj.createdBy}</h4>
+                        </Link>
+                        )}
+
+                    <p id="created-at">{moment(quoteObj.createdAt).format('LL')}</p>
                     <ContentEditable
                         className="quote-content"
                         html={quoteObj.quote}
                         disabled={true}
                     />
-                    <div className="quote-origin row">
-                        <p id="quote-author" className="col-md-3">Author : {quoteObj.author} </p>
-                        <p className="col-md-9">Book Title : {quoteObj.title}, P. {quoteObj.page}</p>
+                    <div className="quote-origin">
+                        <p id="quote-author">{quoteObj.author}, </p>
+                        <p>{quoteObj.title}</p>
+                        <p>p. {quoteObj.page}</p>
                     </div>
                     <div className="comment-section">
                         <p>{quoteObj.comment}</p>
-                        <h6> - {quoteObj.createdBy}</h6>
                     </div>
                     {userObj.uid === quoteObj.creatorId &&
                         (<div className="quote-buttons"><button
-                            onClick={onUpdateClick}>Update this Quote</button>
+                            onClick={onUpdateClick}>Update</button>
                             <button
-                                onClick={onDeleteQuoteClick}> Delete this Quote</button>
+                                onClick={onDeleteQuoteClick}> Delete</button>
                         </div>)}
                 </>)}
         </div>

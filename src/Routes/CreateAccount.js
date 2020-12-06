@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { authService, db } from "../fbase";
+import { authService, db} from "../fbase";
 
 const CreateAccount = () => {
     const [email, setEmail] = useState("");
@@ -19,6 +19,10 @@ const CreateAccount = () => {
             await authService.createUserWithEmailAndPassword(
                 email, password
             )
+            const userUid = authService.currentUser.uid;
+            await db.collection('profiles').doc(userUid).set({
+                email, userUid,
+            })
         } catch (error) {
             setError(error.message)
             console.log(error)

@@ -1,23 +1,36 @@
 body{
     position: relative;
     margin: 40px;
-    padding-bottom: 10px;
-    border: solid 1px grey;
+    padding: 15px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    border: solid 5px grey;
     min-height: 400px;
     font-family: 'Times New Roman', Times, serif;
 }
-
+h1 {
+    text-align: center;
+}
 input {
     font-family: monospace;
     border: none;
     border-bottom: 1px solid grey;
     margin: 5px;
 }
+#quote-submit{
+    width: 33px;
+    padding: 2px;
+    border-radius: 25%;
+}
 button {
     border: none;
     border-bottom: 1px solid grey;
     margin: 5px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: monospace;
+    font-size: 13px;
+}
+.container {
+    max-width: 600px;
 }
 .quote-input{
     font-size: 20px;
@@ -30,11 +43,27 @@ button {
     padding: 5px;
 }
 .input-detail{
-    margin-left: 20vh;
+    margin-left: 15vh;
+}
+#author-input{
+    padding: 0px;
+    width: 100px;
+}
+#title-input{
+    padding: 0px;
+    width: 250px;
+}
+#page-input{
+    padding: 0px;
+    width: 45px;
+}
+#comment-input{
+    padding: 0px;
+    width: 250px;
 }
 .input-personal {
 
-    margin-left: 20vh;
+    margin-left: 15vh;
 }
 
 ul {
@@ -42,12 +71,25 @@ ul {
     font-size: 20px;
 }
 
+.profile-fav-author ul{
+    font-size: 14px;
+    padding: 0px;
+    margin-bottom: 2px;
+}
+
 .quotes-list{
+    position: relative;
     border: 1px solid;
-    margin-top: 50px;
+    margin-top: 35px;
     margin-left: 20px;
     padding: 10px;
-    width: 75%;
+    width: 100%;
+    background: rgb(205, 205, 205);
+}
+#created-at {
+    position: absolute;
+    right: 20px;
+    top: 10px;
 }
 
 .quote-content{
@@ -56,13 +98,19 @@ ul {
     font-weight: lighter;
     font-family: monospace;
     text-decoration: underline grey;
+    background: white;
 }
 
 .quote-origin{
-    color: grey;
+    color: rgb(38, 38, 38);
+    font-size: 13px;
     font-family: serif;
     margin-left: 20vh;
+    text-align: right;
+}
+.quote-origin p{
     margin-top: 3px;
+    margin-bottom: 0px;
 }
 #quote-author{
     margin-bottom: 0px;
@@ -74,21 +122,28 @@ ul {
     border: 1px solid;
     padding: 15px;
 }
-
-#user-description{
-    width: 400px;
+.comment-section p {
+    margin: 0px;
 }
-
-footer{
-    position: absolute;
-    right: 10px;
-    bottom: -40px;
+.quote-buttons{
+    text-align: right;
 }
-
+/* navigation */
 .link {
     color: grey;    
 }
 .navigation :hover{
     color: grey;
     font-weight: bolder;
+}
+/*profile */
+#sign-out{
+    position: absolute;
+    right: 20px;
+}
+
+footer{
+    position: absolute;
+    right: 10px;
+    bottom: -40px;
 }

@@ -19,7 +19,6 @@ const Auth = () => {
             event.preventDefault();
             await authService.signInWithEmailAndPassword(
                 email, password)
-            
         } catch (error) {
             setSignInError(error.message);
             console.log(error.message);
@@ -43,6 +42,10 @@ const Auth = () => {
             if(error.code === 'auth/account-exists-with-different-credential'){
                 authService.fetchSignInMethodsForEmail(email).then((providers) => {})
             }
+        })
+        const userUid = authService.currentUser.uid;
+        await db.collection('profiles').doc(userUid).set({
+            email, userUid,
         })
     }
     return (

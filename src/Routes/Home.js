@@ -3,13 +3,14 @@ import { db } from "../fbase";
 import ContentEditable from "react-contenteditable";
 import Quote from "../Components/Quote";
 
-const Home = ({ userObj }) => {
+const Home = ({ userObj, profiles }) => {
     const [quote, setQuote] = useState("");
     const [author, setAuthor] = useState("");
     const [title, setTitle] = useState("");
     const [quotes, setQuotes] = useState([]);
     const [page, setPage] = useState("");
     const [comment, setComment] = useState("");
+
     useEffect(() => {
         // getQuotes();
         db.collection("quotes").orderBy("createdAt", "desc")
@@ -46,9 +47,6 @@ const Home = ({ userObj }) => {
                 creatorId: userObj.uid,
                 createdBy: userObj.displayName,
             })
-            // db.collection("quotes")
-            // .orderBy("createdAt", "desc");
-
             setQuote("");
             setAuthor("");
             setTitle("");
@@ -73,7 +71,7 @@ const Home = ({ userObj }) => {
                     <input className="col-xs-8 col-md-6" id="title-input" onChange={onChange} value={title}
                         type="text" name="title" placeholder="BOOK TITLE" />
                     <input className="col-xs-4 col-md-2" id="page-input" onChange={onChange} value={page}
-                        type="text" name="page" placeholder="PAGE" />
+                        type="text" name="page" placeholder="PAGE"/>
                 </div>
                 <br />
                 <div className="row input-personal">
