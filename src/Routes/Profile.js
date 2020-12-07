@@ -19,11 +19,9 @@ const Profile = ({ profile }) => {
     useEffect(() => {
         getProfile();
     }, [])
-    favWriters.map(writer => (
-        console.log(writer.favoriteAuthor)
-    ))
     return (
         <div>
+            <h4>{profile.displayName}</h4>
           <ul>
           { favWriters.map(writer => (
         <li key={writer.id}>{writer.favoriteAuthor}</li>

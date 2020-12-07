@@ -35,6 +35,9 @@ const MyProfile = ({ userObj }) => {
         await authService.currentUser.updateProfile({
             displayName,
         })
+        await db.doc(`profiles/${userObj.uid}`).update({
+            displayName,
+        })
     }
     const handleFavAuthorChange = (event) => {
         const { target: { value } } = event;

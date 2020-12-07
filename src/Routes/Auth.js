@@ -44,8 +44,10 @@ const Auth = () => {
             }
         })
         const userUid = authService.currentUser.uid;
+        const displayName= authService.currentUser.displayName;
+        const email = authService.currentUser.email;
         await db.collection('profiles').doc(userUid).set({
-            email, userUid,
+            email, userUid,displayName,
         })
     }
     return (

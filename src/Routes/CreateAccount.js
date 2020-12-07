@@ -22,6 +22,7 @@ const CreateAccount = () => {
             const userUid = authService.currentUser.uid;
             await db.collection('profiles').doc(userUid).set({
                 email, userUid,
+                displayName: email,
             })
         } catch (error) {
             setError(error.message)
