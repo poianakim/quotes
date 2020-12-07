@@ -42,6 +42,9 @@ button {
     margin-bottom: 10px;
     padding: 5px;
 }
+.share-quotes-label{
+    font-family: monospace;
+}
 .input-detail{
     margin-left: 15vh;
 }
@@ -113,8 +116,10 @@ ul {
     font-size: 15px;
     font-weight: lighter;
     font-family: monospace;
+    text-decoration: rgb(126, 14, 126) underline;
     border: 1px solid;
-    padding: 15px;
+    padding: 10px;
+    background: white;
 }
 .comment-section p {
     margin: 0px;
@@ -123,12 +128,25 @@ ul {
     text-align: right;
 }
 /* navigation */
+.navigation{
+    font-family: Georgia, 'Times New Roman', Times, serif
+}
 .link {
     color: grey;    
+}
+.link :hover{
+    color: grey;
+    text-decoration: none;
 }
 .navigation :hover{
     color: grey;
     font-weight: bolder;
+}
+#fav-author-list{
+    padding-left: 15px;
+}
+.fav-author-edit-btn{
+    margin-top: 20px;
 }
 .fav-authors {
     padding-bottom: 10px;
@@ -139,7 +157,9 @@ ul {
     margin-bottom: 2px;
     list-style-type: square;
 }
-
+.profile-edit{
+    margin-left: 0px;
+}
 /*user profile*/
 .user-name{
  text-align: center;
@@ -154,5 +174,13 @@ ul {
 footer{
     position: absolute;
     right: 10px;
-    bottom: -40px;
+    bottom: -60px;
+}
+
+footer a {
+    text-decoration: none;
+    color: black;
+}
+footer a :hover {
+    color: rgb(61, 184, 61)
 }

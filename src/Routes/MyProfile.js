@@ -97,13 +97,6 @@ const MyProfile = ({ userObj }) => {
     return (
         <div>
             <h4 className="user-name">{userObj.displayName}'s profile page</h4>
-            <form onSubmit={onProfileSubmit} className="profile-edit row">
-                <input type="text" onChange={onChange}
-                    value={displayName} name="displayname" 
-                    placeholder="User Name" />
-                <br />
-                <input type="submit" value="Update Username" />
-            </form>
             <div>
                 <h5 className="fav-authors">My Favorite Writers</h5>
                
@@ -111,16 +104,22 @@ const MyProfile = ({ userObj }) => {
                     <FavoriteAuthorEdit key={author.id} favAuthorObj={author} authorListEditMode={authorListEditMode} />
                 )}
                  {authorListEditMode ?
-                    <button onClick={toggleEditAuthorList}>Edit Done</button> :
-                    <button onClick={toggleEditAuthorList}>Edit List</button>}
+                    <button className="fav-author-edit-btn" onClick={toggleEditAuthorList}>Edit Done</button> :
+                    <button className="fav-author-edit-btn" onClick={toggleEditAuthorList}>Edit List</button>}
             </div>
             <form >
                 <input
                     onChange={handleFavAuthorChange}
                     type="text" name="favorite-author" value={favAuthor} placeholder="Add a favorite author" />
-                <input onClick={onSubmitFavAuthor} type="submit" value="add an author" />
+                <input onClick={onSubmitFavAuthor} type="submit" value="Submit" />
             </form>
-
+            <form onSubmit={onProfileSubmit} className="profile-edit row">
+                <input type="text" onChange={onChange}
+                    value={displayName} name="displayname" 
+                    placeholder="User Name" />
+                <br />
+                <input type="submit" value="Update Username" />
+            </form>
 
             <br />
             <button id="sign-out" onClick={onSignOutClick} >Sign Out</button>

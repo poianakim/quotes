@@ -21,18 +21,19 @@ const FavoriteAuthorEdit = ({ favAuthorObj, authorListEditMode }) => {
     }
     return (
         <div className="profile-fav-author">
-            {!authorListEditMode && <ul>
+            {!authorListEditMode &&
+                <ul id="fav-author-list">
                     <li>{favAuthorObj.favoriteAuthor}</li>
                 </ul>}
-            {authorListEditMode && 
+            {authorListEditMode &&
                 (<form onSubmit={onSubmitEditedFavAuthor}>
                     <input onChange={onChange} value={editedFavAuthor} type="text"
                         placeholder={favAuthorObj.favoriteAuthor} />
                     <input type="submit" value="submit change" />
                     <button id="delete-fav-author" onClick={onDeleteAuthorClick}>Delete</button>
                 </form>
-            )
-                 }
+                )
+            }
         </div>
     )
 }

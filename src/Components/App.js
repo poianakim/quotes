@@ -37,6 +37,7 @@ const App = () => {
       {init ? <AppRouter profiles={profiles} userObj={userObj} isLoggedIn={isLoggedIn} /> : "Inizializing"}
       <footer>
         &copy;"Quotes" {new Date().getFullYear()}
+        <br/>by <a target="_blank" rel="noreferrer" href="https://github.com/poianakim">POIANA KIM</a>
       </footer>
     </div>
   )

@@ -58,7 +58,7 @@ const Home = ({ userObj, profiles }) => {
     }
     return (
         <div className="container">
-            <span>Share your favorite quote</span>
+            <span className="share-quotes-label">📖 Share Your Favorite Quotes 🖋</span>
             <form onSubmit={onSubmit}>
                 <ContentEditable
                     className="quote-input"
