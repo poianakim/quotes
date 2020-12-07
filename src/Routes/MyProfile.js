@@ -118,7 +118,7 @@ const MyProfile = ({ userObj }) => {
                     value={displayName} name="displayname" 
                     placeholder="User Name" />
                 <br />
-                <input type="submit" value="Update Username" />
+                <input id="username-update-btn" type="submit" value="Update Username" />
             </form>
 
             <br />
