@@ -71,12 +71,6 @@ ul {
     font-size: 20px;
 }
 
-.profile-fav-author ul{
-    font-size: 14px;
-    padding: 0px;
-    margin-bottom: 2px;
-}
-
 .quotes-list{
     position: relative;
     border: 1px solid;
@@ -136,12 +130,27 @@ ul {
     color: grey;
     font-weight: bolder;
 }
-/*profile */
+.fav-authors {
+    padding-bottom: 10px;
+}
+.profile-fav-author ul{
+    font-size: 18px;
+    padding: 0px;
+    margin-bottom: 2px;
+    list-style-type: square;
+}
+
+/*user profile*/
+.user-name{
+ text-align: center;
+ text-decoration: underline;
+ margin-bottom: 25px;
+}
+/*myprofile */
 #sign-out{
     position: absolute;
     right: 20px;
 }
-
 footer{
     position: absolute;
     right: 10px;

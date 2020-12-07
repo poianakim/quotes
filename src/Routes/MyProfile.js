@@ -31,13 +31,47 @@ const MyProfile = ({ userObj }) => {
             setDisplayName(value)
         }
     }
-    const onProfileSubmit = async (event) => {
-        await authService.currentUser.updateProfile({
+    const updateAuthProfile = async() => {
+        await authService.currentUser
+        .updateProfile({
             displayName,
         })
-        await db.doc(`profiles/${userObj.uid}`).update({
-            displayName,
+    }
+    const updateProfileName = async () => {
+        db.collection('profiles').where('userUid', "==", userObj.uid)
+       .get().then(response => {
+        let batch = db.batch()
+        response.docs.forEach((doc) => {
+            const docRef = db.collection('profiles').doc(doc.id)
+            batch.update(docRef, {
+                displayName,
+            })
         })
+        batch.commit().then(() => {
+            console.log(`updated profile displayName done`)
+        })
+       })
+    }
+    const updateQuoteCreatorName = async () => {
+       db.collection('quotes').where('creatorId', "==", userObj.uid)
+       .get().then(response => {
+        let batch = db.batch()
+        response.docs.forEach((doc) => {
+            const docRef = db.collection('quotes').doc(doc.id)
+            batch.update(docRef, {
+                createdBy: displayName,
+            })
+        })
+        batch.commit().then(() => {
+            console.log(`updated quotes done`)
+        })
+       })
+    }
+    const onProfileSubmit =  (event) => {
+        event.preventDefault();
+        updateAuthProfile();
+        updateProfileName();
+        updateQuoteCreatorName();
     }
     const handleFavAuthorChange = (event) => {
         const { target: { value } } = event;
@@ -50,7 +84,6 @@ const MyProfile = ({ userObj }) => {
             creatorId: userObj.uid,
             createdAt: Date.now(),
         })
-        setFavAuthor("");
     }
     const history = useHistory();
     const onSignOutClick = () => {
@@ -63,15 +96,16 @@ const MyProfile = ({ userObj }) => {
 
     return (
         <div>
-            <h4>{userObj.displayName}'s profile page</h4>
+            <h4 className="user-name">{userObj.displayName}'s profile page</h4>
             <form onSubmit={onProfileSubmit} className="profile-edit row">
                 <input type="text" onChange={onChange}
-                    value={displayName} name="displayname" placeholder="User Name" />
+                    value={displayName} name="displayname" 
+                    placeholder="User Name" />
                 <br />
                 <input type="submit" value="Update Username" />
             </form>
             <div>
-                <h5>My Favorite Writers</h5>
+                <h5 className="fav-authors">My Favorite Writers</h5>
                
                 {favAuthors.map((author) =>
                     <FavoriteAuthorEdit key={author.id} favAuthorObj={author} authorListEditMode={authorListEditMode} />

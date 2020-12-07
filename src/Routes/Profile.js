@@ -20,14 +20,17 @@ const Profile = ({ profile }) => {
         getProfile();
     }, [])
     return (
-        <div>
-            <h4>{profile.displayName}</h4>
-          <ul>
-          { favWriters.map(writer => (
-        <li key={writer.id}>{writer.favoriteAuthor}</li>
-        ))
-    }
-          </ul>
+        <div className="profile-fav-author">
+            <h4 className="user-name">{profile.displayName}'s profile page</h4>
+            <div>
+                <h5 className="fav-authors">{profile.displayName}'s Favorite Writers</h5>
+                <ul>
+                    {favWriters.map(writer => (
+                        <li key={writer.id}>{writer.favoriteAuthor}</li>
+                    ))
+                    }
+                </ul>
+            </div>
         </div>
     )
 }
