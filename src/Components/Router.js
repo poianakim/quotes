@@ -10,7 +10,7 @@ import Navigation from "./Navigation";
 const AppRouter = ({ profiles, isLoggedIn, userObj }) => {
     const profile = profiles.map((profile) => (
         <Route key={profile.id} path={`/${profile.id}`}>
-            <Profile profile={profile} userObj/>
+            <Profile profile={profile} userObj={userObj}/>
         </Route>
     ))
 

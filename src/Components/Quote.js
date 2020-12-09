@@ -3,10 +3,6 @@ import React, { useState } from "react";
 import ContentEditable from "react-contenteditable";
 import { Link } from "react-router-dom";
 import { db } from "../fbase";
-import { HashRouter as Route } from "react-router-dom";
-import Profile from "../Routes/Profile";
-import Switch from "react-bootstrap/esm/Switch";
-
 
 const Quote = ({ quoteObj, userObj }) => {
     const [editMode, setEditMode] = useState(false);
@@ -82,7 +78,7 @@ const Quote = ({ quoteObj, userObj }) => {
                     />
                     <div className="quote-origin">
                         <p id="quote-author">{quoteObj.author}, </p>
-                        <p>{quoteObj.title}</p>
+                        <p>『{quoteObj.title}』</p>
                         <p>p. {quoteObj.page}</p>
                     </div>
                     <div className="comment-section">
