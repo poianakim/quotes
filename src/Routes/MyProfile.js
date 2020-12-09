@@ -39,7 +39,7 @@ const MyProfile = ({ userObj }) => {
             })
     }
     const updateProfileName = async () => {
-        db.collection('profiles').where('userUid', "==", userObj.uid)
+        await db.collection('profiles').where('userUid', "==", userObj.uid)
             .get().then(response => {
                 let batch = db.batch()
                 response.docs.forEach((doc) => {
@@ -54,7 +54,7 @@ const MyProfile = ({ userObj }) => {
             })
     }
     const updateQuoteCreatorName = async () => {
-        db.collection('quotes').where('creatorId', "==", userObj.uid)
+        await db.collection('quotes').where('creatorId', "==", userObj.uid)
             .get().then(response => {
                 let batch = db.batch()
                 response.docs.forEach((doc) => {
@@ -124,7 +124,7 @@ const MyProfile = ({ userObj }) => {
             <form onSubmit={onProfileSubmit} className="profile-edit row">
                 <input type="text" onChange={onChange}
                     value={displayName} name="displayname"
-                    placeholder="User Name" />
+                    placeholder="User Name" maxLength="10" />
                 <br />
                 <input id="username-update-btn" type="submit" value="Update Username" />
             </form>

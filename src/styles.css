@@ -100,7 +100,7 @@ ul {
 #created-at {
     position: absolute;
     right: 20px;
-    top: 10px;
+    top: 40px;
 }
 .profile-created-at {
     position: absolute;
@@ -210,6 +210,18 @@ ul {
     flex-direction: column;
     border: 1px solid #f1edeb; 
     padding: 10px;
+}
+.landing {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+.landingpage{
+    padding-left: 20px;
+    margin-right: 35px;
+}
+.auth-form-2 input{
+    margin-left: 0px;
 }
 
 .profile-fav-author{
