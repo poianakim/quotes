@@ -39,7 +39,7 @@ const MyProfile = ({ userObj }) => {
             })
     }
     const updateProfileName = async () => {
-        await db.collection('profiles').where('userUid', "==", userObj.uid)
+         db.collection('profiles').where('userUid', "==", userObj.uid)
             .get().then(response => {
                 let batch = db.batch()
                 response.docs.forEach((doc) => {
@@ -54,7 +54,7 @@ const MyProfile = ({ userObj }) => {
             })
     }
     const updateQuoteCreatorName = async () => {
-        await db.collection('quotes').where('creatorId', "==", userObj.uid)
+        db.collection('quotes').where('creatorId', "==", userObj.uid)
             .get().then(response => {
                 let batch = db.batch()
                 response.docs.forEach((doc) => {
