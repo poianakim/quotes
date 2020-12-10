@@ -43,12 +43,6 @@ const Auth = () => {
                 authService.fetchSignInMethodsForEmail(email).then((providers) => { })
             }
         })
-        const userUid = authService.currentUser.uid;
-        const displayName = authService.currentUser.displayName;
-        const email = authService.currentUser.email;
-        await db.collection('profiles').doc(userUid).set({
-            email, userUid, displayName,
-        })
     }
     return (
         <div className="landing">
