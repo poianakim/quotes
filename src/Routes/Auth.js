@@ -33,16 +33,23 @@ const Auth = () => {
             provider = new firebaseInstance.auth.GithubAuthProvider();
 
         }
-        await authService.signInWithPopup(provider).then((result) => {
-            const user = result.user;
-            const credential = result.credential;
-        }, (error) => {
-            const email = error.email;
-            const credential = error.credential;
-            if (error.code === 'auth/account-exists-with-different-credential') {
-                authService.fetchSignInMethodsForEmail(email).then((providers) => { })
-            }
-        })
+        await authService.signInWithPopup(provider)
+        // .then((result) => {
+        //     const user = result.user;
+        //     const credential = result.credential;
+        // }, (error) => {
+        //     const email = error.email;
+        //     const credential = error.credential;
+        //     if (error.code === 'auth/account-exists-with-different-credential') {
+        //         authService.fetchSignInMethodsForEmail(email).then((providers) => { })
+        //     }
+        // })
+        // const userUid = authService.currentUser.uid;
+        // const displayName = authService.currentUser.displayName;
+        // const email = authService.currentUser.email;
+        // await db.collection('profiles').doc(userUid).set({
+        //     email, userUid, displayName,
+        // })
     }
     return (
         <div className="landing">
