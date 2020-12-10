@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../fbase";
+import { authService, db } from "../fbase";
 import ContentEditable from "react-contenteditable";
 import Quote from "../Components/Quote";
 
@@ -10,8 +10,16 @@ const Home = ({ userObj, profiles }) => {
     const [quotes, setQuotes] = useState([]);
     const [page, setPage] = useState("");
     const [comment, setComment] = useState("");
-
+    const setProfiles = async () => {
+        const userUid = authService.currentUser.uid;
+        const displayName = authService.currentUser.displayName;
+        const email = authService.currentUser.email;
+        await db.collection('profiles').doc(userUid).set({
+            email, userUid, displayName,
+        })
+    }
     useEffect(() => {
+       setProfiles();
         // getQuotes();
         db.collection("quotes").orderBy("createdAt", "desc")
             .onSnapshot((snapshot) => {
