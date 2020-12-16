@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { authService, db} from "../fbase";
 
 const CreateAccount = () => {
@@ -13,6 +14,7 @@ const CreateAccount = () => {
             setPassword(value)
         }
     }
+    const history = useHistory();
     const onSubmit = async (event) => {
         try {
             event.preventDefault();
@@ -28,6 +30,7 @@ const CreateAccount = () => {
             setError(error.message)
             console.log(error)
         }
+        history.push("/home")
     }
     return (
         <div>

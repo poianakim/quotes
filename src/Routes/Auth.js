@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { authService, db, firebaseInstance } from "../fbase";
+import { authService, firebaseInstance } from "../fbase";
 
 const Auth = () => {
     const [email, setEmail] = useState("");

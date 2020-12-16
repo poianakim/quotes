@@ -20,7 +20,6 @@ const Home = ({ userObj, profiles }) => {
     }
     useEffect(() => {
        setProfiles();
-        // getQuotes();
         db.collection("quotes").orderBy("createdAt", "desc")
             .onSnapshot((snapshot) => {
                 const quotesArr = snapshot.docs.map((doc) => ({
@@ -53,7 +52,7 @@ const Home = ({ userObj, profiles }) => {
                 quote, author, title, page, comment,
                 createdAt: Date.now(),
                 creatorId: userObj.uid,
-                createdBy: userObj.displayName,
+                displayName: userObj.displayName,
             })
             setQuote("");
             setAuthor("");

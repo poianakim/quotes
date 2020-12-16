@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { db } from "../fbase";
 import moment from "moment";
 import ContentEditable from "react-contenteditable";
-import { useRouteMatch } from "react-router-dom";
 
 
 const MyQuotes = ({ userObj }) => {
@@ -22,8 +21,9 @@ const MyQuotes = ({ userObj }) => {
     }
 
     useEffect(() => {
-        getQuotes()
-    })
+        getQuotes();
+        
+    },[])
     return (
         <div className ="profile-quote-list">
             <ul>

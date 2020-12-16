@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ContentEditable from "react-contenteditable";
 import { Link } from "react-router-dom";
 import { db } from "../fbase";
@@ -63,10 +63,10 @@ const Quote = ({ quoteObj, userObj }) => {
                     { userObj.uid !== quoteObj.creatorId ?
                         (
                             <Link className="link" to={`/${quoteObj.creatorId}`}>
-                                <h4>{quoteObj.createdBy}</h4>
+                                <h4>{quoteObj.displayName}</h4>
                             </Link>
                         ) : (<Link className="link" to="/profile">
-                            <h4>{quoteObj.createdBy}</h4>
+                            <h4>{quoteObj.displayName}</h4>
                         </Link>
                         )}
 
