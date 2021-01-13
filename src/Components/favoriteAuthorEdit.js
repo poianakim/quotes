@@ -12,12 +12,12 @@ const FavoriteAuthorEdit = ({ favAuthorObj, authorListEditMode }) => {
         await db.doc(`fav-author/${favAuthorObj.id}`).delete()
     }
     const onSubmitEditedFavAuthor = async (event) => {
+        event.preventDefault();
         await db.doc(`fav-author/${favAuthorObj.id}`).update({
             favoriteAuthor: editedFavAuthor,
             updatedAt: Date.now(),
         })
         setEditedFavAuthor("")
-        const authorListEditModeChange = (authorListEditMode) => !authorListEditMode
     }
     return (
         <div className="profile-fav-author">
@@ -29,7 +29,6 @@ const FavoriteAuthorEdit = ({ favAuthorObj, authorListEditMode }) => {
                 (<form onSubmit={onSubmitEditedFavAuthor}>
                     <input onChange={onChange} value={editedFavAuthor} type="text"
                         placeholder={favAuthorObj.favoriteAuthor} />
-                    <input type="submit" value="submit change" />
                     <button id="delete-fav-author" onClick={onDeleteAuthorClick}>Delete</button>
                 </form>
                 )

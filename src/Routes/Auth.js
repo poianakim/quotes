@@ -57,7 +57,7 @@ const Auth = () => {
                 <h4>"Sometimes <br /> the Books <br /> Speak for you"</h4>
             </div>
             <div className="auth-form">
-                <form className="container" onSubmit={onSubmit}>
+                <form className="auth-form-container" onSubmit={onSubmit}>
                     <input
                         className="auth-form-1 row"
                         onChange={onChange}
@@ -80,7 +80,7 @@ const Auth = () => {
                     <input type="submit" value=" Sign Up with Email " />
                 </Link>
                 </div>
-                <h3>{signInError}</h3>
+                <h3 id="error-message">{signInError}</h3>
             </div>
         </div>
     )

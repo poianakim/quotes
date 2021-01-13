@@ -30,7 +30,7 @@ const CreateAccount = () => {
             setError(error.message)
             console.log(error)
         }
-        history.push("/home")
+        history.push("/")
     }
     return (
         <div>

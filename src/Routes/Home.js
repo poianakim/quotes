@@ -11,12 +11,18 @@ const Home = ({ userObj, profiles }) => {
     const [page, setPage] = useState("");
     const [comment, setComment] = useState("");
     const setProfiles = async () => {
-        const userUid = authService.currentUser.uid;
-        const displayName = authService.currentUser.displayName;
-        const email = authService.currentUser.email;
-        await db.collection('profiles').doc(userUid).set({
-            email, userUid, displayName,
-        })
+        try {
+            const userUid = authService.currentUser.uid;
+            const displayName = authService.currentUser.displayName;
+            const email = authService.currentUser.email;
+            await db.collection('profiles').doc(userUid).set({
+                email,
+                userUid,
+                displayName,
+            })
+        } catch(e){
+            console.log(e);
+        }
     }
     useEffect(() => {
        setProfiles();

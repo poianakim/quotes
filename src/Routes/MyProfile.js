@@ -30,43 +30,7 @@ const MyProfile = ({ userObj }) => {
         if (name === "displayname") {
             setDisplayName(value)
         }
-    }
-    // const updateAuthProfile = async () => {
-    //     await authService.currentUser
-    //         .updateProfile({
-    //             displayName,
-    //         }).then(console.log("auth profile displayname changed"))
-    // }
-    // // const updateProfileName =  () => {
-    // //       db.collection('profiles').where('userUid', "==", userObj.uid)
-    // //         .get().then(response => {
-    // //             let batch = db.batch()
-    // //             response.docs.forEach((doc) => {
-    // //                 const docRef = db.collection('profiles').doc(doc.id)
-    // //                 batch.update(docRef, {
-    // //                     displayName,
-    // //                 })
-    // //             })
-    // //             batch.commit().then(() => {
-    // //                 console.log(`updated profiles displayName done`)
-    // //             })
-    // //         })
-    // // }
-    // const updateQuoteCreatorName = async() => {
-    //    db.collection('quotes').where('creatorId', "==", userObj.uid)
-    //         .get().then(response => {
-    //             let batch = db.batch()
-    //             response.docs.forEach((doc) => {
-    //                 const docRef = db.collection('quotes').doc(doc.id)
-    //                 batch.update(docRef, {
-    //                     "displayName" : displayName,
-    //                 })
-    //             })
-    //             batch.commit().then(() => {
-    //                 console.log(`updated quotes' displayname`)
-    //             })
-    //         })
-    // }
+    } 
     const onProfileSubmit = async (event) => {
        event.preventDefault();
         db.collection('quotes').where('creatorId', "==", userObj.uid)
@@ -99,6 +63,7 @@ const MyProfile = ({ userObj }) => {
             creatorId: userObj.uid,
             createdAt: Date.now(),
         })
+        setFavAuthor("");
     }
     const history = useHistory();
     const onSignOutClick = () => {
